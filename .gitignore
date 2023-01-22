@@ -1,0 +1,9 @@
+# log
+*.log
+
+# pyc
+*.pyc
+__pycache__
+
+# splite
+*.sqlite3
