@@ -34,6 +34,6 @@ Updated：更新日 <br>
 |api/create|POST|新規ユーザー作成（ユーザー名とパスワード）|
 |api/users|GET|ユーザーリスト取得|
 |api/loginuser|GET|ログインユーザー情報取得|
-|api/category|POST|新規カテゴリ作成|
-|api/profile|POST/PUT|プロフィール作成＋更新|
+|api/category|POST/GET|新規カテゴリ作成|
+|api/profile|POST/GET/PUT|プロフィール作成＋更新|
 |api/tasks|POST/GET/PUT/DELETE|タスクのCRUD|
