@@ -96,7 +96,7 @@ REST_FRAMEWORK = {
     # プロジェクト全体の認証設定
     "DEFAULT_AUTHENTICATION_CLASSES": [
         # 認証にJWTを使用する
-        "rest_framework.simplejwt.authentication.JWTAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
 
