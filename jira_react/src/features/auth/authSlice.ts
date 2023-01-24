@@ -20,7 +20,7 @@ export const fetchAsyncLogin = createAsyncThunk(
     // POSTでアクセスして、JWTトークンを発行
     // ジェネリクスで返り値を指定
     const res = await axios.post<JWT>(
-      `$(process.env.REACT_APP_API_URL)/authen/jwt/create/`,
+      `${process.env.REACT_APP_API_URL}/authen/jwt/create/`,
       auth,
       {
         headers: {
@@ -37,7 +37,7 @@ export const fetchAsyncRegister = createAsyncThunk(
   "auth/register",
   async (auth: CRED) => {
     const res = await axios.post<USER>(
-      `$(process.env.REACT_APP_API_URL)/api/create/`,
+      `${process.env.REACT_APP_API_URL}/api/create/`,
       auth,
       {
         headers: {
@@ -54,7 +54,7 @@ export const fetchAsyncGetMyProf = createAsyncThunk(
   "auth/loginuser",
   async () => {
     const res = await axios.get<LOGIN_USER>(
-      `$(process.env.REACT_APP_API_URL)/api/loginuser/`,
+      `${process.env.REACT_APP_API_URL}/api/loginuser/`,
       {
         headers: {
           Authorization: `JWT ${localStorage.localJWT}`,
@@ -70,7 +70,7 @@ export const fetchAsyncCreateProf = createAsyncThunk(
   "auth/createProfile",
   async () => {
     const res = await axios.post<PROFILE>(
-      `$(process.env.REACT_APP_API_URL)/api/profile/`,
+      `${process.env.REACT_APP_API_URL}/api/profile/`,
       { img: null },
       {
         headers: {
@@ -88,7 +88,7 @@ export const fetchAsyncGetProfs = createAsyncThunk(
   "auth/getProfiles",
   async () => {
     const res = await axios.get<PROFILE[]>(
-      `$(process.env.REACT_APP_API_URL)/api/profile/`,
+      `${process.env.REACT_APP_API_URL}/api/profile/`,
       {
         headers: {
           Authorization: `JWT ${localStorage.localJWT}`,
@@ -107,7 +107,7 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
     const uploadData = new FormData();
     profile.img && uploadData.append("img", profile.img, profile.img.name);
     const res = await axios.put<PROFILE>(
-      `$(process.env.REACT_APP_API_URL)/api/profile/${profile.id}/`,
+      `${process.env.REACT_APP_API_URL}/api/profile/${profile.id}/`,
       uploadData,
       {
         headers: {

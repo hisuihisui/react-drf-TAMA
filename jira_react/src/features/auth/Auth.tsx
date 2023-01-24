@@ -69,6 +69,7 @@ const Auth: React.FC = () => {
         value={credential.username}
         onChange={handleInputChange}
       />
+      <br />
       <TextField
         // ラベルの表示
         InputLabelProps={{
