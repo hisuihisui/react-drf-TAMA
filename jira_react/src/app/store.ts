@@ -1,12 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 
+import authReducer from "../features/auth/authSlice";
+
 export const store = configureStore({
   reducer: {
+    // authReducerをstoreへ登録
+    auth: authReducer,
     counter: counterReducer,
   },
 });
 
+// dispatch用の型
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
