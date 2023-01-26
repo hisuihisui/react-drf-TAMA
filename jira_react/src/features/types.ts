@@ -40,7 +40,7 @@ export interface JWT {
 
 // DRFのUSERモデル
 export interface USER {
-  id: string;
+  id: number;
   username: string;
 }
 
@@ -50,4 +50,50 @@ export interface AUTH_STATE {
   isLoginView: boolean;
   loginUser: LOGIN_USER;
   profiles: PROFILE[];
+}
+
+// TaskをGETで取得したときに使用
+export interface READ_TASK {
+  id: number;
+  task: string;
+  description: string;
+  criteria: string;
+  status: string;
+  status_name: string;
+  category: number;
+  category_item: string;
+  estimate: number;
+  owner: number;
+  owner_username: string;
+  responsible: number;
+  responsible_username: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// POST用のTask
+export interface POST_TASK {
+  id: number;
+  task: string;
+  description: string;
+  criteria: string;
+  status: string;
+  category: number;
+  estimate: number;
+  responsible: number;
+}
+
+// Category
+export interface CATEGORY {
+  id: number;
+  item: string;
+}
+
+// State
+export interface TASK_STATE {
+  tasks: READ_TASK[];
+  editedTask: POST_TASK;
+  selectedTask: READ_TASK;
+  users: USER[];
+  category: CATEGORY[];
 }
