@@ -86,3 +86,6 @@ npm i axios@0.27.2
 1.createMuiThemeがcreateThemeに名前が変更になった為、2箇所変更をお願いいたします。
 <br>
 2. GridのjustifyがjustifyContentに変更なった為、名前変更をお願いいたします。
+
+### Warning: Failed prop type: Material-UI
+コンソールに表示されるwarningですが、 material UIのBadgeに関連したlibrary側の仕様になりますので無視してください。

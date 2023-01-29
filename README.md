@@ -37,3 +37,7 @@ Updated：更新日 <br>
 |api/category|POST/GET|新規カテゴリ作成|
 |api/profile|POST/GET/PUT|プロフィール作成＋更新|
 |api/tasks|POST/GET/PUT/DELETE|タスクのCRUD|
+
+## デプロイ
+### AWS Ubuntu version
+最新版に対応するために替わりに 20.04を選択して進めるようにしてください。
