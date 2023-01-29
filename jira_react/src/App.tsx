@@ -1,40 +1,40 @@
-import React,{useEffect} from 'react';
-import styles from './App.module.css';
-import { Grid, Avatar} from "@material-ui/core";
+import { Avatar, Grid } from "@material-ui/core";
 import {
-  makeStyles,
-  createTheme,
   MuiThemeProvider,
   Theme,
+  createTheme,
+  makeStyles,
 } from "@material-ui/core/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PolymerIcon from "@material-ui/icons/Polymer";
+import React, { useEffect } from "react";
+import styles from "./App.module.css";
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import {
-  selectLoginUser,
-  selectProfiles,
   fetchAsyncGetMyProf,
   fetchAsyncGetProfs,
   fetchAsyncUpdateProf,
+  selectLoginUser,
+  selectProfiles,
 } from "./features/auth/authSlice";
 import {
+  fetchAsyncGetCategory,
   fetchAsyncGetTasks,
   fetchAsyncGetUsers,
-  fetchAsyncGetCategory,
   selectEditedTask,
   selectTasks,
-} from './features/task/taskSlice';
+} from "./features/task/taskSlice";
 
-import TaskList from './features/task/TaskList';
+import { AppDispatch } from "./app/store";
+import TaskDisplay from "./features/task/TaskDisplay";
 import TaskForm from "./features/task/TaskForm";
-import TaskDisplay from './features/task/TaskDisplay';
-import { AppDispatch } from './app/store';
+import TaskList from "./features/task/TaskList";
 
 // MaterialUIのSecondaryの色を緑色へ変更
 const theme = createTheme({
   palette: {
-    secondary : {
+    secondary: {
       // カラーコード
       main: "#3cb371",
     },
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
     marginLeft: theme.spacing(1),
   },
-}))
+}));
 
 const App: React.FC = () => {
   // useStylesの実行
@@ -73,9 +73,9 @@ const App: React.FC = () => {
   // ログアウト時の挙動
   // JWTをlocalStorageから削除し、ログイン画面へ遷移
   const logout = () => {
-    localStorage.removeItem("localJWT")
+    localStorage.removeItem("localJWT");
     window.location.href = "/";
-  }
+  };
 
   // アバター画像押下時に実行
   const handlerEditPicture = () => {
@@ -83,7 +83,7 @@ const App: React.FC = () => {
     const fileInput = document.getElementById("imageInput");
     // ファイルダイアログを開く
     fileInput?.click();
-  }
+  };
 
   // Appコンポーネントレンダリング時に実行
   useEffect(() => {
@@ -156,9 +156,9 @@ const App: React.FC = () => {
           <Grid item xs={6}>
             <Grid
               container
-              direction='column'
-              alignItems='center'
-              justifyContent='center'
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
               style={{ minHeight: "80vh" }}
             >
               <Grid item>
@@ -173,6 +173,6 @@ const App: React.FC = () => {
       </div>
     </MuiThemeProvider>
   );
-}
+};
 
 export default App;
