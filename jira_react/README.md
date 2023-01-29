@@ -81,3 +81,8 @@ npm i @material-ui/core @material-ui/icons @material-ui/lab --legacy-peer-deps
 ```
 npm i axios@0.27.2
 ```
+
+## Material UI
+1.createMuiThemeがcreateThemeに名前が変更になった為、2箇所変更をお願いいたします。
+<br>
+2. GridのjustifyがjustifyContentに変更なった為、名前変更をお願いいたします。
