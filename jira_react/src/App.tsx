@@ -153,6 +153,8 @@ const App: React.FC = () => {
             {/* ?? タスク追加ボタンはどうするんだろう */}
             {tasks[0]?.task && <TaskList />}
           </Grid>
+          {/* 画面右 */}
+          {/* ??:詳細やフォームの表示あたりがよくわからん */}
           <Grid item xs={6}>
             <Grid
               container

@@ -35,7 +35,7 @@ class TaskSerializer(serializers.ModelSerializer):
     # 外部キーを参照しているものはIDを取得する
     # IDではなく、そのモデルの特定のカラムを取得したい
     # 例：カテゴリのitemを取得したい
-    category_Item = serializers.ReadOnlyField(
+    category_item = serializers.ReadOnlyField(
         source="category.item", read_only=True
     )
     # ownerの名前を取得したい
@@ -71,7 +71,7 @@ class TaskSerializer(serializers.ModelSerializer):
             "status",
             "status_name",
             "category",
-            "category_Item",
+            "category_item",
             "estimate",
             "owner",
             "owner_username",
