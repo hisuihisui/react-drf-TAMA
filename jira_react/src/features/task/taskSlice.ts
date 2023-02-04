@@ -237,16 +237,13 @@ export const taskSlice = createSlice({
         return {
           ...state,
           category: [...state.category, action.payload],
-        }
+        };
       }
     );
     // Category作成失敗後
-    builder.addCase(
-      fetchAsyncCreateCategory.rejected,
-      () => {
-        window.location.href = "/";
-      }
-    );
+    builder.addCase(fetchAsyncCreateCategory.rejected, () => {
+      window.location.href = "/";
+    });
     // Task作成成功後
     builder.addCase(
       fetchAsyncCreateTask.fulfilled,
@@ -255,9 +252,9 @@ export const taskSlice = createSlice({
           ...state,
           tasks: [action.payload, ...state.tasks],
           editedTask: initialState.editedTask,
-        }
+        };
       }
-    )
+    );
     // Task作成失敗後
     builder.addCase(fetchAsyncCreateTask.rejected, () => {
       window.location.href = "/";
@@ -275,7 +272,7 @@ export const taskSlice = createSlice({
           selectedTask: initialState.selectedTask,
         };
       }
-    )
+    );
     // Task更新失敗後
     builder.addCase(fetchAsyncUpdateTask.rejected, () => {
       window.location.href = "/";
@@ -291,22 +288,22 @@ export const taskSlice = createSlice({
           selectedTask: initialState.selectedTask,
         };
       }
-    )
+    );
     // Task削除失敗後
     builder.addCase(fetchAsyncDeleteTask.rejected, () => {
       window.location.href = "/";
     });
-  }
+  },
 });
 
 export const { editTask, selectTask } = taskSlice.actions;
 
 // useSelector
 // Stateの特定の値を返す
-export const selectSelectedTask = (state:RootState) => state.task.selectedTask
-export const selectEditedTask = (state:RootState) => state.task.editedTask
-export const selectTasks = (state:RootState) => state.task.tasks
-export const selectUsers = (state:RootState) => state.task.users
+export const selectSelectedTask = (state: RootState) => state.task.selectedTask;
+export const selectEditedTask = (state: RootState) => state.task.editedTask;
+export const selectTasks = (state: RootState) => state.task.tasks;
+export const selectUsers = (state: RootState) => state.task.users;
 export const selectCategory = (state: RootState) => state.task.category;
 
 export default taskSlice.reducer;

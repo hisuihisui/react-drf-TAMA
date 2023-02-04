@@ -196,8 +196,8 @@ export const { toggleMode } = authSlice.actions;
 
 // useSelector
 // Stateの特定の値を返す
-export const selectIsLoginView = (state: RootState) => state.auth.isLoginView
-export const selectLoginUser = (state: RootState) => state.auth.loginUser
+export const selectIsLoginView = (state: RootState) => state.auth.isLoginView;
+export const selectLoginUser = (state: RootState) => state.auth.loginUser;
 export const selectProfiles = (state: RootState) => state.auth.profiles;
 
 export default authSlice.reducer;
