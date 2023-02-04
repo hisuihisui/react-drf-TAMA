@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import styles from "./TaskList.module.css";
 
-import { makeStyles, Theme } from '@material-ui/core';
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined"
-import EditOutlineIcon from "@material-ui/icons/EditOutlined"
 import {
   Avatar,
   Badge,
   Button,
+  makeStyles,
   Table,
-  TableHead,
-  TableCell,
-  TableRow,
   TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
   TableSortLabel,
-} from "@material-ui/core"
+  Theme,
+} from "@material-ui/core";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import EditOutlineIcon from "@material-ui/icons/EditOutlined";
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../app/store";
+import { selectLoginUser, selectProfiles } from "../auth/authSlice";
+import { READ_TASK, SORT_STATE } from "../types";
 import {
-  fetchAsyncDeleteTask,
-  selectTasks,
   editTask,
+  fetchAsyncDeleteTask,
+  initialState,
   selectTask,
-} from "./taskSlice"
-import {selectLoginUser, selectProfiles} from "../auth/authSlice"
-import { AppDispatch } from '../../app/store';
-import { initialState } from './taskSlice';
-import { SORT_STATE, READ_TASK } from '../types';
+  selectTasks,
+} from "./taskSlice";
 
 // material-uiのスタイルを定義
 const useStyle = makeStyles((theme: Theme) => ({
@@ -45,7 +46,7 @@ const useStyle = makeStyles((theme: Theme) => ({
 }));
 
 // Task一覧を表示するコンポーネント
-const TaskList : React.FC = () => {
+const TaskList: React.FC = () => {
   const classes = useStyle();
   const dispatch: AppDispatch = useDispatch();
 
@@ -107,10 +108,10 @@ const TaskList : React.FC = () => {
     switch (statusName) {
       case "Not Started":
         return (
-          <Badge variant='dot' color='error'>
+          <Badge variant="dot" color="error">
             {statusName}
           </Badge>
-        )
+        );
       case "On going":
         return (
           <Badge variant="dot" color="primary">
@@ -126,7 +127,7 @@ const TaskList : React.FC = () => {
       default:
         return null;
     }
-  }
+  };
 
   // ユーザーIDからプロフィール画像を持ってくる
   const conditionalSrc = (user: number) => {
@@ -134,7 +135,7 @@ const TaskList : React.FC = () => {
       (prof) => prof.user_profile === user
     )[0];
     return loginProfile?.img !== null ? loginProfile?.img : undefined;
-  }
+  };
 
   return (
     <>
@@ -267,6 +268,6 @@ const TaskList : React.FC = () => {
       )}
     </>
   );
-}
+};
 
-export default TaskList
+export default TaskList;
