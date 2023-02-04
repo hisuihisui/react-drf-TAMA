@@ -97,3 +97,12 @@ export interface TASK_STATE {
   users: USER[];
   category: CATEGORY[];
 }
+
+// タスク一覧のソート用
+export interface SORT_STATE {
+  rows: READ_TASK[];
+  // 降順もしくは昇順
+  order: "desc" | "asc";
+  // 有効になっているソートのラベル名
+  activeKey: string;
+}
