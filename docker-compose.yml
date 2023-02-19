@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  django:
+    container_name: tma_django
+    build: ./tma_api/.
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./tma_api/.env.development
+    volumes:
+      - ./tma_api:/home/app/api/
+      - static_volume:/home/app/api/static
+      - ./logs/api:/var/log/api
+    stdin_open: true
+    tty: true
+    command: gunicorn --bind :8000 tma_api.wsgi:application
+    networks:
+      - backend_network
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - db
+
+  db:
+    container_name: tma_mysql
+    build: ./mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password # rootのパスワード
+      MYSQL_DATABASE: django # djangoが使用するDB
+      MYSQL_USER: djangouser # djangoが使用するユーザー
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password # MYSQL_USERのパスワード
+      TZ: "Asia/Tokyo"
+    secrets:
+      - db_password
+      - db_root_password
+    volumes:
+      - ./mysql/mysql_volume:/var/lib/mysql
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+      - ./logs/mysql:/var/log/mysql
+    networks:
+      - backend_network
+
+  react:
+    container_name: tma_react
+    image: node:14.13.1
+    volumes:
+      - ./tma_react:/home/app/front
+    ports:
+      - 3000:3000
+    working_dir: /home/app/front
+    command: [bash, -c, npm upgrade --no-progress --network-timeout 1000000 && npm install && npm start]
+    networks:
+      - frontend_network
+
+  nginx:
+    container_name: tma_nginx
+    build:
+      context: ./nginx/.
+      dockerfile: Dockerfile
+    volumes:
+      - static_volume:/home/app/api/static
+      - ./logs/nginx:/var/log/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+      - react
+    networks:
+      - backend_network
+      - frontend_network
+
+networks:
+  backend_network:
+    driver: bridge
+  frontend_network:
+    driver: bridge
+volumes:
+  static_volume:
+
+# 機密情報ファイルをイメージへコピー
+secrets:
+  db_password:
+    file: ./mysql/secrets/djangouser_secret.txt
+  db_root_password:
+    file: ./mysql/secrets/root_secret.txt
