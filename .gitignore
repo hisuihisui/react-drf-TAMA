@@ -1,6 +1,10 @@
 # log
 *.log
+logs
 
 # pyc
 *.pyc
 __pycache__
+.mypy_cache
+
+mysql/
