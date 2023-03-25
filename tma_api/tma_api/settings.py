@@ -10,37 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import environ
 import os
 
 # JWTの有効期限を設定するため
 from datetime import timedelta
-# from pathlib import Path
-
-env = environ.Env(
-    # 初期値を設定
-    DEBUG=(bool, False)
-)
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
-# .envファイルのパスを指定するためにBASE_DIRをmanage.pyのある階層に指定
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# manage.pyのある階層にある.envを読み込む
-environ.Env.read_env(os.path.join(BASE_DIR, '.env.development'))
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get("SECRET_KEY")
-# .envのSECRET_KEYをSECRET_KEYに代入
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = "12^1y9)*=9&(_rp9i$#vsmerm5(npaueypsuct%(^j*@%n85-7"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -119,12 +106,8 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("DB_ENGINE"),
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": os.environ.get("DB_HOST"),
-        "PORT": os.environ.get("DB_PORT"),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -165,12 +148,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# 静的ファイルの格納先
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-# 静的ファイルのURLの起点
 STATIC_URL = "/static/"
 
 # 画像データの格納先
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-# 画像データのURLの起点
 MEDIA_URL = "/media/"
